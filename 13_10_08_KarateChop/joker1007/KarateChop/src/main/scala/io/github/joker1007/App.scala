@@ -1,3 +1,5 @@
+package io.github.joker1007
+
 /**
  * Created with IntelliJ IDEA.
  * User: joker
