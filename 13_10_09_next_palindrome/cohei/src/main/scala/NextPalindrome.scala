@@ -11,11 +11,7 @@ object NextPalindrome {
   }
 
   def nextPalindrome(n: Int): Int = {
-    from(n+1).filter(isPalindrome(_)).head
-  }
-
-  private def from(n: Int): Stream[Int] = {
-    n #:: from(n+1)
+    Stream.from(n+1).filter(isPalindrome(_)).head
   }
 
   private def isPalindrome(n: Int): Boolean = {
