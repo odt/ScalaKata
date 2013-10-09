@@ -1,6 +1,9 @@
 package karateexpert
 
+import scala.annotation.tailrec
+
 class KarateExpert {
+  @tailrec
   private def chop(value: Int, array: List[Int], offset: Int): Option[Int] = {
     if (array.length == 0) {
       return None
