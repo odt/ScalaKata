@@ -7,7 +7,7 @@ class KarateExpertSpec extends FlatSpec with Matchers {
   it should "break tiles and search target" in {
     val targetAndTilesAndExpected =
       Table(
-        ("target", "tile", "expected"),
+        ("target", "tiles", "expected"),
         (3, List(), None),
         (3, List(1), None),
         (1, List(1), Some(0)),
@@ -27,9 +27,9 @@ class KarateExpertSpec extends FlatSpec with Matchers {
         (4, List(1, 3, 5, 7), None),
         (6, List(1, 3, 5, 7), None),
         (8, List(1, 3, 5, 7), None))
-    forAll(targetAndTilesAndExpected) { (target: Int, tile: List[Int], expected: Option[Int]) =>
+    forAll(targetAndTilesAndExpected) { (target: Int, tiles: List[Int], expected: Option[Int]) =>
       val karateExpert = new KarateExpert
-      karateExpert.chop(target, tile) should be(expected)
+      karateExpert.chop(target, tiles) should be(expected)
     }
   }
 }
