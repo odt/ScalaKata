@@ -12,8 +12,8 @@ import io.github.joker1007.PaindromeDetecter
 class PaindromeDetecterSpec extends FunSpec with ShouldMatchers {
   describe("next") {
     describe("Given 123456") {
-      it("should equal 125521") {
-        PaindromeDetecter.next(123456) should equal (125521)
+      it("should equal 124421") {
+        PaindromeDetecter.next(123456) should equal (124421)
       }
     }
 
