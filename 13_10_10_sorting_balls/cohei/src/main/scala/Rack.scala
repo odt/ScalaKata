@@ -2,7 +2,7 @@ import scalaz._
 
 case class Rack[A: Order](balls: Seq[A] = Seq()) {
   def add(ball: A): Rack[A] = {
-    Rack(insert(ball, balls))
+    copy(insert(ball, balls))
   }
 
   private def insert(y: A, xs: Seq[A]): Seq[A] = {
