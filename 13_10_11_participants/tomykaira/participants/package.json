@@ -1,10 +1,10 @@
 {
 	"name": "participants",
-	"description": "An example project skeleton",
+	"description": "Solution for participants kata",
 	"homepage": "http://example.org",
-	"copyright": "Copyright © 2000, Your Name",
+	"copyright": "Copyright © 2013, tomykaira",
 	"authors": [
-		"Your Name"
+		"tomykaira"
 	],
 	"dependencies": {
 	}
