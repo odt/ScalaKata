@@ -3,7 +3,7 @@ package io.github.joker1007
 import scala.io.Source
 
 class WeatherDataReader(source : Source) {
-  def withData[U](f : WeatherData => U) {
+  def withData(f : WeatherData => Any) {
     for(line <- source.getLines()) {
       WeatherDataParser.parseDataLine(line) match {
         case Some(d) => f(d)
