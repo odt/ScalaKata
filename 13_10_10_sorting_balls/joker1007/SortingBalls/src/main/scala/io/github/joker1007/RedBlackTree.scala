@@ -26,7 +26,7 @@ trait Rootable[T] {
 }
 
 case class Empty[T <% Ordered[T]]() extends RedBlackTree[T] with Rootable[T]{
-  def insert(x : T) : Node[T] = Node[T](Black(), Leaf(), x, Leaf())
+  def insert(x : T) : Node[T] = Node[T](Black, Leaf(), x, Leaf())
   def add(x : T) : Node[T] = insert(x)
 
   def balance : RedBlackTree[T] = this
@@ -34,7 +34,7 @@ case class Empty[T <% Ordered[T]]() extends RedBlackTree[T] with Rootable[T]{
 
 private case class Leaf[T <% Ordered[T]]() extends RedBlackTree[T] {
   def insert(x : T) : Node[T] = {
-    Node[T](Red(), Leaf(), x, Leaf()).balance
+    Node[T](Red, Leaf(), x, Leaf()).balance
   }
 
   def balance: RedBlackTree[T] = this
@@ -45,9 +45,9 @@ case class Node[T <% Ordered[T]](color : NodeColor, left : RedBlackTree[T], valu
 
   def add(x : T) = {
     val tree = insert(x)
-    tree match {
-      case Node(Red(), l, v, r) => Node[T](Black(), l, v, r)
-      case Node(Black(), _, _, _) => tree
+    tree.color match {
+      case Red => tree.copy(color = Black)
+      case _ => tree
     }
   }
 
@@ -60,17 +60,17 @@ case class Node[T <% Ordered[T]](color : NodeColor, left : RedBlackTree[T], valu
 
   def balance: Node[T] = {
     color match {
-      case Red() => this
-      case Black() =>
+      case Red => this
+      case Black =>
         this match {
-          case Node(_, Node(Red(), Node(Red(), Leaf(), v2, Leaf()), v1, Leaf()), v, r) =>
-            copy(Red(), Node(Black(), Leaf(), v2, Leaf()), v1, Node(Black(), Leaf(), v, r))
-          case Node(_, Node(Red(), Leaf(), v1, Node(Red(), Leaf(), v2, Leaf())), v, r) =>
-            copy(Red(), Node(Black(), Leaf(), v1, Leaf()), v2, Node(Black(), Leaf(), v, r))
-          case Node(_, l, v, Node(Red(), Node(Red(), Leaf(), v2, Leaf()), v1, Leaf())) =>
-            copy(Red(), Node(Black(), l, v, Leaf()), v2, Node(Black(), Leaf(), v1, Leaf()))
-          case Node(_, l, v, Node(Red(), Leaf(), v1, Node(Red(), Leaf(), v2, Leaf()))) =>
-            copy(Red(), Node(Black(), l, v, Leaf()), v1, Node(Black(), Leaf(), v2, Leaf()))
+          case Node(_, Node(Red, Node(Red, Leaf(), v2, Leaf()), v1, Leaf()), v, r) =>
+            copy(Red, Node(Black, Leaf(), v2, Leaf()), v1, Node(Black, Leaf(), v, r))
+          case Node(_, Node(Red, Leaf(), v1, Node(Red, Leaf(), v2, Leaf())), v, r) =>
+            copy(Red, Node(Black, Leaf(), v1, Leaf()), v2, Node(Black, Leaf(), v, r))
+          case Node(_, l, v, Node(Red, Node(Red, Leaf(), v2, Leaf()), v1, Leaf())) =>
+            copy(Red, Node(Black, l, v, Leaf()), v2, Node(Black, Leaf(), v1, Leaf()))
+          case Node(_, l, v, Node(Red, Leaf(), v1, Node(Red, Leaf(), v2, Leaf()))) =>
+            copy(Red, Node(Black, l, v, Leaf()), v1, Node(Black, Leaf(), v2, Leaf()))
           case _ =>
             this
         }
@@ -80,7 +80,7 @@ case class Node[T <% Ordered[T]](color : NodeColor, left : RedBlackTree[T], valu
 
 sealed abstract class NodeColor
 
-private case class Red() extends NodeColor
+private case object Red extends NodeColor
 
-private case class Black() extends NodeColor
+private case object Black extends NodeColor
 
