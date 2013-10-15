@@ -1,0 +1,11 @@
+{
+	"name": "data_mungling",
+	"description": "An example project skeleton",
+	"homepage": "http://example.org",
+	"copyright": "Copyright © 2000, Your Name",
+	"authors": [
+		"tomykaira"
+	],
+	"dependencies": {
+	}
+}
