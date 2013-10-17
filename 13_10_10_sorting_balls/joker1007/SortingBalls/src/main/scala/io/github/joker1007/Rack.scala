@@ -8,11 +8,11 @@ package io.github.joker1007
  * To change this template use File | Settings | File Templates.
  */
 class Rack[T <% Ordered[T]] {
-  private[this] var sortedBalls = List[T]()
+  private[this] var sortedBalls : RedBlackTree[T] with Rootable[T] = Empty[T]()
 
-  def balls : List[T] = sortedBalls
+  def balls : List[T] = sortedBalls.toList
 
   def add(item : T) {
-    sortedBalls = (item :: sortedBalls).sortBy(x => x)
+    sortedBalls = sortedBalls.add(item)
   }
 }
