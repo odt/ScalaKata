@@ -38,4 +38,16 @@ class JavaVersionSpec extends FlatSpec with ShouldMatchers with VersionBehavior 
   "JavaVersion.parse" should "return None when parse invalid version" in {
     JavaVersion.parse("JDK7u9x") should equal (None)
   }
+
+  "JavaVersion(7, 40)" should "be lower than JavaVersion(7, 41)" in {
+    JavaVersion(7, 40) should be < JavaVersion(7, 41)
+  }
+
+  "JavaVersion(6, 40)" should "be lower than JavaVersion(7, 40)" in {
+    JavaVersion(6, 40) should be < JavaVersion(7, 40)
+  }
+
+  "JavaVersion(7, 41)" should "be lower than JavaVersion(8, 40)" in {
+    JavaVersion(7, 41) should be < JavaVersion(8, 40)
+  }
 }

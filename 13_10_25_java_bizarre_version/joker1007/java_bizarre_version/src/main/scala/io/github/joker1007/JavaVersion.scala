@@ -1,6 +1,13 @@
 package io.github.joker1007
 
-case class JavaVersion(familyNumber: Int, updateNumber: Int)
+case class JavaVersion(familyNumber: Int, updateNumber: Int) extends Ordered[JavaVersion] {
+  def compare(that: JavaVersion) = {
+    if (familyNumber == that.familyNumber)
+      updateNumber - that.updateNumber
+    else
+      familyNumber - that. familyNumber
+  }
+}
 
 object JavaVersion {
   val versionRegex = """^JDK([1-9]\d*)u([1-9]\d*)$""".r
