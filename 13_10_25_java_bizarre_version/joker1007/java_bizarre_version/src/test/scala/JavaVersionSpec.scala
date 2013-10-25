@@ -25,13 +25,17 @@ class JavaVersionSpec extends FlatSpec with ShouldMatchers with VersionBehavior 
   "JDK7u0"   should behave like invalidVersion("JDK7u0")
   "JDK7u1"   should behave like validVersion("JDK7u1")
 
-  "JavaVersion.parse" should "parse version string into JavaVersion instance" in {
-    JavaVersion.parse("JDK7u40").isInstanceOf[JavaVersion] should be (true)
+  "JavaVersion.parse" should "parse version string into Option[JavaVersion] instance" in {
+    JavaVersion.parse("JDK7u40").isInstanceOf[Option[JavaVersion]] should be (true)
   }
 
   "JavaVersion.parse" should "assign parsed string into property" in {
-    val javaVersion = JavaVersion.parse("JDK8u60")
+    val Some(javaVersion) = JavaVersion.parse("JDK8u60")
     javaVersion.familyNumber should equal (8)
     javaVersion.updateNumber should equal (60)
+  }
+
+  "JavaVersion.parse" should "return None when parse invalid version" in {
+    JavaVersion.parse("JDK7u9x") should equal (None)
   }
 }

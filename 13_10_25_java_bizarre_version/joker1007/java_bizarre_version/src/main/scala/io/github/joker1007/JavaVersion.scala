@@ -12,9 +12,10 @@ object JavaVersion {
     }
   }
 
-  def parse(str : String) : JavaVersion = {
-    val versionRegex(familyNumber, updateNumber) = str
-    JavaVersion(familyNumber.toInt, updateNumber.toInt)
+  def parse(str : String) : Option[JavaVersion] = {
+    for {
+      versionRegex(familyNumber, updateNumber) <- matchVersion(str)
+    } yield JavaVersion(familyNumber.toInt, updateNumber.toInt)
   }
 
   private[this] def matchVersion(str: String) : Option[String] = {
