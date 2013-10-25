@@ -50,4 +50,24 @@ class JavaVersionSpec extends FlatSpec with ShouldMatchers with VersionBehavior 
   "JavaVersion(7, 41)" should "be lower than JavaVersion(8, 40)" in {
     JavaVersion(7, 41) should be < JavaVersion(8, 40)
   }
+
+  "JavaVersion(7, 40) nextLimitedUpdate" should "return JavaVersion(7, 60)" in {
+    JavaVersion(7, 40).nextLimitedUpdate should equal (JavaVersion(7, 60))
+  }
+
+  "JavaVersion(7, 61) nextLimitedUpdate" should "return JavaVersion(7, 80)" in {
+    JavaVersion(7, 61).nextLimitedUpdate should equal (JavaVersion(7, 80))
+  }
+
+  "JavaVersion(7, 61) nextCriticalPatchUpdate" should "return JavaVersion(7, 65)" in {
+    JavaVersion(7, 61).nextCriticalPatchUpdate should equal (JavaVersion(7, 65))
+  }
+
+  "JavaVersion(7, 65) nextCriticalPatchUpdate" should "return JavaVersion(7, 71)" in {
+    JavaVersion(7, 65).nextCriticalPatchUpdate should equal (JavaVersion(7, 71))
+  }
+
+  "JavaVersion(7, 65) nextSecurityAlert" should "return JavaVersion(7, 66)" in {
+    JavaVersion(7, 65).nextSecurityAlert should equal (JavaVersion(7, 66))
+  }
 }

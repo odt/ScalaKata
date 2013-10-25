@@ -7,6 +7,22 @@ case class JavaVersion(familyNumber: Int, updateNumber: Int) extends Ordered[Jav
     else
       familyNumber - that. familyNumber
   }
+
+  def nextLimitedUpdate : JavaVersion = {
+    val temp = (updateNumber + 20)
+    val newUpdateNumber = temp - (temp % 20)
+    copy(updateNumber = newUpdateNumber)
+  }
+
+  def nextCriticalPatchUpdate : JavaVersion = {
+    val temp = (updateNumber + 5)
+    val newUpdateNumber = temp - (temp % 5)
+    copy(updateNumber = if (newUpdateNumber % 2 == 0) newUpdateNumber + 1 else newUpdateNumber)
+  }
+
+  def nextSecurityAlert : JavaVersion = {
+    copy(updateNumber = updateNumber + 1)
+  }
 }
 
 object JavaVersion {
