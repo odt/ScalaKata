@@ -4,7 +4,7 @@ import scala.annotation.tailrec
 import scala.collection.mutable.ListBuffer
 
 class Rack {
-  private val balls_ : ListBuffer[Int] = new ListBuffer[Int]
+  var balls_ : List[Int] = Nil
   def balls: List[Int] = balls_.to[List]
 
   @tailrec
@@ -19,12 +19,13 @@ class Rack {
       case _ => offset + index
     }
   }
-  
+
   def chop(value: Int, array: List[Int]): Int = {
     chop(value, array, 0)
   }
 
   def add(ball: Int) = {
-    balls_.insert(chop(ball, balls_.to[List]), ball);
+    val (before, after) = balls_.splitAt(chop(ball, balls_))
+    balls_ = before ::: (ball :: after)
   }
 }
