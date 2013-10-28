@@ -3,7 +3,8 @@ package io.github.saturday06
 import scala.annotation.tailrec
 import scala.collection.mutable.ListBuffer
 
-class Rack(private val balls_ : ListBuffer[Int] = new ListBuffer[Int]) {
+class Rack {
+  private val balls_ : ListBuffer[Int] = new ListBuffer[Int]
   def balls: List[Int] = balls_.to[List]
 
   @tailrec
