@@ -1,6 +1,10 @@
 import scalaz._
 
-case class Rack[A: Order](balls: Seq[A] = Seq()) {
+object Rack {
+  def init = Rack[Int](Seq())
+}
+
+case class Rack[A: Order] private (balls: Seq[A]) {
   def add(ball: A): Rack[A] = copy(insert(ball, balls))
 
   private def insert(y: A, xs: Seq[A]): Seq[A] = {
