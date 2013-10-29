@@ -26,6 +26,6 @@ class Rack {
 
   def add(ball: Int) = {
     val (before, after) = balls_.splitAt(chop(ball, balls_))
-    balls_ = before ::: (ball :: after)
+    balls_ = before ::: List(ball) ::: after
   }
 }
