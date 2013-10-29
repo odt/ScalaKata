@@ -5,7 +5,7 @@ import scala.collection.mutable.ListBuffer
 
 class Rack {
   var balls_ : List[Int] = Nil
-  def balls: List[Int] = balls_
+  def balls = balls_
 
   @tailrec
   private[this] def chop(value: Int, array: List[Int], offset: Int): Int = {
