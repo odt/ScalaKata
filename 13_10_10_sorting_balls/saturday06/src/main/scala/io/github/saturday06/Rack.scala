@@ -4,7 +4,7 @@ import scala.annotation.tailrec
 import scala.collection.mutable.ListBuffer
 
 class Rack {
-  var balls_ : List[Int] = Nil
+  var balls_ = List[Int]()
   def balls = balls_
 
   @tailrec
