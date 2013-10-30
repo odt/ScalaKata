@@ -15,8 +15,9 @@ class PalindromesSpec extends FlatSpec with Matchers {
         (100, 101),
         (89890, 89898),
         (213123212, 213131312))
-    forAll(targetAndTilesAndExpected) { (input: Int, next: Int) =>
-      Palindromes.next(input) should be (next)
+    forAll(targetAndTilesAndExpected) {
+      (input: Int, next: Int) =>
+        Palindromes.next(input) should be(next)
     }
   }
 }
