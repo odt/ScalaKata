@@ -2,29 +2,29 @@ package io.github.saturday06
 
 import scala.annotation.tailrec
 import scala.math._
+import scala.collection.mutable.ListBuffer
 
 object Palindromes {
-  @tailrec
-  def next(value: Int): Int = {
-    val nextValue = value + 1
-    if (check(nextValue)) {
-      nextValue
+  def intToDigitList(value: Int): List[Int] = {
+    if (value > 0) {
+      intToDigitList(value / 10) ::: List(value % 10)
     } else {
-      next(nextValue)
+      List[Int]()
     }
   }
 
-  def check(value: Int): Boolean = {
-    if (value < 10) {
-      return true
+  def digitListToInt(digitList: List[Int]): Int = {
+    if (digitList.length > 1) {
+      digitList.last + digitListToInt(digitList.dropRight(1)) * 10
+    } else {
+      digitList.last
     }
-    val tailDigit = value % 10
-    val rank = pow(10, log10(value).floor).toInt
-    val headDigit = value / rank
-    if (tailDigit == headDigit) {
-      return check((value - tailDigit - headDigit * rank) / 10)
-    }
-    return false
+  }
+
+  def next(value: Int): Int = {
+    // 前半より後半の逆順のほうが大きい場合、前半を後半の逆順につけて終了
+    
+    11
   }
 }
 
