@@ -6,7 +6,7 @@ class WeatherDataParser extends RegexParsers {
   val digitValue: Parser[String] = """[\d\.]+""".r
   val wxType: Parser[String] = """[A-Z]""".r
   val value: Parser[String] = digitValue | wxType
-  val data: Parser[List[String]] = rep(rep(whiteSpace) ~> value)
+  val data: Parser[List[String]] = repN(15, rep(whiteSpace) ~> value)
 
   private[this] val maximumTemperatureIndex = 1
   private[this] val minimumTemperatureIndex = 2

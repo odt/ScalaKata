@@ -10,4 +10,9 @@ class WeatherDataParserSpec extends FlatSpec with ShouldMatchers {
     result.get.maximumTemperature should equal (88)
     result.get.minimumTemperature should equal (59)
   }
+
+  it should "return None if invalid Stream" in {
+    val result = parser.parseDataLine(""" 1 A B C """)
+    result shouldBe empty
+  }
 }
