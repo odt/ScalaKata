@@ -22,13 +22,15 @@ class PalindromesSpec extends FlatSpec with Matchers {
     val targetAndTilesAndExpected =
       Table(
         ("input", "next"),
-        (10, 11)
-        //(2, 3),
-        //(8, 9),
-        //(9, 11),
-        //(100, 101),
-        //(89890, 89898),
-        //(213123212, 213131312)
+        (10, 11),
+        (20, 22),
+        (500, 505)
+      //(2, 3),
+      //(8, 9),
+      //(9, 11),
+      //(100, 101),
+      //(89890, 89898),p
+      //(213123212, 213131312)
       )
     forAll(targetAndTilesAndExpected) {
       (input: Int, next: Int) =>

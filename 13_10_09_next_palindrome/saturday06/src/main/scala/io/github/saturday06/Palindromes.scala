@@ -22,8 +22,19 @@ object Palindromes {
   }
 
   def next(value: Int): Int = {
-    // 前半より後半の逆順のほうが大きい場合、前半を後半の逆順につけて終了
-    
+    // 前半より後半の逆順のほうが小さい場合、前半の逆順を後半につけて終了
+    val digitList = intToDigitList(value + 1)
+    val firstHalf = digitListToInt(digitList.take(digitList.size / 2))
+    val secondHalf = digitListToInt(digitList.takeRight(digitList.size / 2).reverse)
+    if (firstHalf > secondHalf) {
+      return digitListToInt(List.range(0, digitList.size).map(offset => {
+        if (offset < digitList.size / 2) {
+          digitList(offset)
+        } else {
+          digitList.reverse(offset)
+        }
+      }))
+    }
     11
   }
 }
