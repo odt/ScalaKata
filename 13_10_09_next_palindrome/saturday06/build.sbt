@@ -1,5 +1,5 @@
 name := "next_palindrome"
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "2.0.RC1" % "test"
+  "org.scalatest" %% "scalatest" % "2.0" % "test"
 )
