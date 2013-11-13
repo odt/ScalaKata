@@ -1,41 +1,31 @@
 package io.github.saturday06
 
-import scala.annotation.tailrec
-import scala.math._
-import scala.collection.mutable.ListBuffer
-
 object Palindromes {
-  def intToDigitList(value: Int): List[Int] = {
+  def toDigits(value: Int): List[Int] = {
     if (value > 0) {
-      intToDigitList(value / 10) ::: List(value % 10)
+      toDigits(value / 10) ::: List(value % 10)
     } else {
       List[Int]()
     }
   }
 
-  def digitListToInt(digitList: List[Int]): Int = {
-    if (digitList.length > 1) {
-      digitList.last + digitListToInt(digitList.dropRight(1)) * 10
+  def toInt(digits: List[Int]): Int = {
+    if (digits.length > 1) {
+      digits.last + toInt(digits.dropRight(1)) * 10
     } else {
-      digitList.last
+      digits.last
     }
   }
 
   def next(value: Int): Int = {
-    // 前半より後半の逆順のほうが小さい場合、前半の逆順を後半につけて終了
-    val digitList = intToDigitList(value + 1)
-    val firstHalf = digitListToInt(digitList.take(digitList.size / 2))
-    val secondHalf = digitListToInt(digitList.takeRight(digitList.size / 2).reverse)
-    if (firstHalf > secondHalf) {
-      return digitListToInt(List.range(0, digitList.size).map(offset => {
-        if (offset < digitList.size / 2) {
-          digitList(offset)
-        } else {
-          digitList.reverse(offset)
-        }
-      }))
+    if (value < 9) {
+      return value + 1
     }
-    11
+    val digits = toDigits(value + 1)
+    val high = toInt(digits.take(digits.size / 2))
+    val low = toInt(digits.takeRight(digits.size / 2).reverse)
+    val highAndCenter = toInt(digits.take((digits.size.toDouble / 2).ceil.toInt))
+    toInt(toDigits(highAndCenter + (if (high < low) 1 else 0)) ::: toDigits(high).reverse)
   }
 }
 
