@@ -22,10 +22,12 @@ object Palindromes {
       return value + 1
     }
     val digits = toDigits(value + 1)
-    val high = toInt(digits.take(digits.size / 2))
-    val low = toInt(digits.takeRight(digits.size / 2).reverse)
+    val reversedHigh = toInt(digits.take(digits.size / 2).reverse)
+    val low = toInt(digits.takeRight(digits.size / 2))
     val highAndCenter = toInt(digits.take((digits.size.toDouble / 2).ceil.toInt))
-    toInt(toDigits(highAndCenter + (if (high < low) 1 else 0)) ::: toDigits(high).reverse)
+    val nextHighAndCenterDigits = toDigits(highAndCenter + (if (reversedHigh < low) 1 else 0))
+    val nextLowDigits = nextHighAndCenterDigits.dropRight(digits.size % 2).reverse
+    toInt(nextHighAndCenterDigits ::: nextLowDigits)
   }
 }
 
