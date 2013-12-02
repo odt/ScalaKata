@@ -10,11 +10,9 @@ object Palindromes {
   }
 
   def toInt(digits: List[Int]): Int = {
-    if (digits.length > 1) {
-      digits.last + toInt(digits.dropRight(1)) * 10
-    } else {
-      digits.last
-    }
+    (for ((digit, index) <- digits.reverse.zipWithIndex) yield {
+      Math.pow(10, index).toInt * digit
+    }).sum
   }
 
   def next(value: Int): Int = {
