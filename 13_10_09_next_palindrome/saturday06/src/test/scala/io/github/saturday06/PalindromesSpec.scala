@@ -2,6 +2,7 @@ package io.github.saturday06
 
 import org.scalatest._
 import org.scalatest.prop.TableDrivenPropertyChecks._
+import scala.annotation.tailrec
 
 class PalindromesSpec extends FunSpec with Matchers {
   describe("toDigits") {
@@ -23,6 +24,23 @@ class PalindromesSpec extends FunSpec with Matchers {
   }
 
   describe("next") {
+    it("matches kazoo04's algorithm") {
+      @tailrec
+      def kazoo04(value: Int): Int = {
+        val nextValue = value + 1
+        if (nextValue.toString == nextValue.toString.reverse) {
+          nextValue
+        } else {
+          kazoo04(nextValue)
+        }
+      }
+
+      List.range(1, 123456).foreach(input => {
+        val next = kazoo04(input)
+        Palindromes.next(input) should be(next)
+      })
+    }
+
     it("calculates next palindrome") {
       val targetAndTilesAndExpected =
         Table(
